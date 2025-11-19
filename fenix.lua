@@ -2742,7 +2742,7 @@ Components.Notification = (function()
 
 	local Notification = {}
 
-	function Notification:Init(GUI)
+	function Notification:Init(BaseContainer)
 		Library.ActiveNotifications = Library.ActiveNotifications or {}
 
 		Notification.Holder = New("Frame", {
@@ -2750,7 +2750,7 @@ Components.Notification = (function()
 			Size = UDim2.new(0, 310, 1, -30),
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
-			Parent = GUI,
+			Parent = BaseContainer,
 		}, {
 			New("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -5864,7 +5864,7 @@ ElementsTable.Input = (function()
 end)()
 
 local NotificationModule = Components.Notification
-NotificationModule:Init(GUI)
+NotificationModule:Init(BaseContainer)
 
 local New = Creator.New
 
@@ -7214,7 +7214,7 @@ function Library:CreateWindow(Config)
 	end
 
 	local Window = Components.Window({
-		Parent = GUI,
+		Parent = BaseContainer,
 		Size = Config.Size,
 		Title = Config.Title,
 		Icon = Icon,
@@ -7242,7 +7242,7 @@ function Library:CreateMinimizer(Config)
 		return self.Minimizer
 	end
 
-	local parentGui = Library.GUI or GUI
+	local parentGui = Library.GUI or BaseContainer
 	if parentGui then parentGui.DisplayOrder = 1000 end
 	local isMobile = Mobile and true or false
 
