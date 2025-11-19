@@ -16,7 +16,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local Mobile = not RunService:IsStudio() and table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform()) ~= nil
 
-local fischbypass = false
+local fischbypass
 
 if game.GameId == 16732694052 or game.GameId == 126244816328678 or game.GameId == 131716211654599 then
 	fischbypass = true
@@ -1488,57 +1488,11 @@ Library.Creator = Creator
 
 local New = Creator.New
 
-local BaseContainer = New("ScreenGui", {
+local GUI = New("ScreenGui", {
 	Parent = LocalPlayer:WaitForChild("PlayerGui"),
 })
-
-
-BaseContainer.Parent = (function() -- https://github.com/Pepsied-5229/Pepsi-UI-Library/blob/main/Pepsi-UI-Library.lua#L503
-	local success, result = pcall(function()
-		return (gethui or get_hidden_ui)()
-	end)
-
-	if success and result then
-		return result
-	end
-
-	success, result = pcall(function()
-		local CoreGui = game:GetService("CoreGui")
-
-		CoreGui:GetFullName()
-
-		return CoreGui
-	end)
-
-	if success and result then
-		return result
-	end
-
-	success, result = pcall(function()
-		return (game:IsLoaded() or game.Loaded:Wait() or true) and game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui", 10)
-	end)
-
-	if success and result then
-		return result
-	end
-
-	success, result = pcall(function()
-		local StarterGui = game:GetService("StarterGui")
-
-		StarterGui:GetFullName()
-
-		return StarterGui
-	end)
-
-	if success and result then
-		return result
-	end
-
-	return error("Seriously bad engine. Can't find a place to store the GUI. Robust code can't help this much incompetence.", 0)
-end)()
-		
-Library.GUI = BaseContainer
-ProtectGui(BaseContainer)
+Library.GUI = GUI
+ProtectGui(GUI)
 
 function Library:SafeCallback(Function, ...)
 	if not Function then
@@ -2742,7 +2696,7 @@ Components.Notification = (function()
 
 	local Notification = {}
 
-	function Notification:Init(BaseContainer)
+	function Notification:Init(GUI)
 		Library.ActiveNotifications = Library.ActiveNotifications or {}
 
 		Notification.Holder = New("Frame", {
@@ -2750,7 +2704,7 @@ Components.Notification = (function()
 			Size = UDim2.new(0, 310, 1, -30),
 			AnchorPoint = Vector2.new(1, 1),
 			BackgroundTransparency = 1,
-			Parent = BaseContainer,
+			Parent = GUI,
 		}, {
 			New("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
@@ -5864,7 +5818,7 @@ ElementsTable.Input = (function()
 end)()
 
 local NotificationModule = Components.Notification
-NotificationModule:Init(BaseContainer)
+NotificationModule:Init(GUI)
 
 local New = Creator.New
 
@@ -7214,7 +7168,7 @@ function Library:CreateWindow(Config)
 	end
 
 	local Window = Components.Window({
-		Parent = BaseContainer,
+		Parent = GUI,
 		Size = Config.Size,
 		Title = Config.Title,
 		Icon = Icon,
@@ -7242,7 +7196,7 @@ function Library:CreateMinimizer(Config)
 		return self.Minimizer
 	end
 
-	local parentGui = Library.GUI or BaseContainer
+	local parentGui = Library.GUI or GUI
 	if parentGui then parentGui.DisplayOrder = 1000 end
 	local isMobile = Mobile and true or false
 
