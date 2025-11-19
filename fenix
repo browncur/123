@@ -16,7 +16,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local Mobile = not RunService:IsStudio() and table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform()) ~= nil
 
-local fischbypass
+local fischbypass = true
 
 if game.GameId == 16732694052 or game.GameId == 126244816328678 or game.GameId == 131716211654599 then
 	fischbypass = true
