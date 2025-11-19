@@ -4676,10 +4676,19 @@ ElementsTable.Paragraph = (function()
 
 	function Paragraph:New(Config)
 		Config.Content = Config.Content or ""
+		Config.Alignment = Config.Alignment or Enum.TextXAlignment.Left
 
 		local Paragraph = Components.Element(Config.Title, Config.Content, Paragraph.Container, false, Config)
 		Paragraph.Frame.BackgroundTransparency = 0.92
 		Paragraph.Border.Transparency = 0.6
+
+		-- Apply alignment to Title and Content
+		if Paragraph.Title then
+			Paragraph.Title.TextXAlignment = Config.Alignment
+		end
+		if Paragraph.Desc then
+			Paragraph.Desc.TextXAlignment = Config.Alignment
+		end
 
 		Paragraph.SetTitle = Paragraph.SetTitle
 		Paragraph.SetDesc = Paragraph.SetDesc
@@ -4692,6 +4701,15 @@ ElementsTable.Paragraph = (function()
 			end
 			if NewContent then
 				Paragraph.SetDesc(self, NewContent)
+			end
+		end
+
+		function Paragraph:SetAlignment(NewAlignment)
+			if Paragraph.Title then
+				Paragraph.Title.TextXAlignment = NewAlignment
+			end
+			if Paragraph.Desc then
+				Paragraph.Desc.TextXAlignment = NewAlignment
 			end
 		end
 
