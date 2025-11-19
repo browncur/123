@@ -11,12 +11,24 @@ local TextService = game:GetService("TextService")
 local Camera = game:GetService("Workspace").CurrentCamera
 local Mouse = LocalPlayer:GetMouse()
 local httpService = game:GetService("HttpService")
-local RunService = game:GetService("RunService")
-local UserInputService = game:GetService("UserInputService")
 
 local Mobile = not RunService:IsStudio() and table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform()) ~= nil
 
-local fischbypass
+-- Удалите или закомментируйте эти строки:
+-- local fischbypass
+-- if game.GameId == 16732694052 or game.GameId == 126244816328678 or game.GameId == 131716211654599 then
+--     fischbypass = true
+-- end
+
+local fischbypass = false -- Просто установите в false
+-- Улучшенная защита GUI
+local ProtectGui = protectgui or (syn and syn.protect_gui) or function(gui)
+    if gui then
+        pcall(function()
+            gui.ResetOnSpawn = false
+        end)
+    end
+end
 
 if game.GameId == 16732694052 or game.GameId == 126244816328678 or game.GameId == 131716211654599 then
 	fischbypass = true
