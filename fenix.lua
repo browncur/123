@@ -5775,7 +5775,14 @@ ElementsTable.Input = (function()
 
 		Input.SetTitle = InputFrame.SetTitle
 		Input.SetDesc = InputFrame.SetDesc
-		Input.Visible = InputFrame.Visible
+		function Input:SetVisible(bool)
+			InputFrame:SetVisible(bool)
+		end
+
+		if Config.Visible == false then
+			Input:SetVisible(false)
+		end
+		
 		Input.Elements = InputFrame
 
 		local Textbox = Components.Textbox(InputFrame.Frame, true)
