@@ -5771,14 +5771,14 @@ ElementsTable.Input = (function()
         local InputFrame = Components.Element(Config.Title, Config.Description, self.Container, false)
         Input.SetTitle = InputFrame.SetTitle
         Input.SetDesc = InputFrame.SetDesc
+        
         function Input:SetVisible(bool)
-			if InputFrame.SetVisible then
-				InputFrame:SetVisible(bool)
-			elseif InputFrame.Elements then
-				InputFrame.Elements.Visible = bool
-			end
-		end
+            InputFrame.Frame.Visible = bool
+        end
+        
+        Input.Visible = Input.SetVisible
         Input.Elements = InputFrame
+        
         local Textbox = Components.Textbox(InputFrame.Frame, true)
         Textbox.Frame.Position = UDim2.new(1, -10, 0.5, 0)
         Textbox.Frame.AnchorPoint = Vector2.new(1, 0.5)
@@ -5786,6 +5786,7 @@ ElementsTable.Input = (function()
         Textbox.Input.Text = Config.Default or ""
         Textbox.Input.PlaceholderText = Config.Placeholder or ""
         local Box = Textbox.Input
+        
         function Input:SetValue(Text)
             if Config.MaxLength and #Text > Config.MaxLength then
                 Text = Text:sub(1, Config.MaxLength)
@@ -5800,6 +5801,7 @@ ElementsTable.Input = (function()
             Library:SafeCallback(Input.Callback, Input.Value)
             Library:SafeCallback(Input.Changed, Input.Value)
         end
+        
         if Input.Finished then
             AddSignal(Box.FocusLost, function(enter)
                 if not enter then
@@ -5812,14 +5814,17 @@ ElementsTable.Input = (function()
                 Input:SetValue(Box.Text)
             end)
         end
+        
         function Input:OnChanged(Func)
             Input.Changed = Func
             Func(Input.Value)
         end
+        
         function Input:Destroy()
             InputFrame:Destroy()
             Library.Options[Idx] = nil
         end
+        
         Library.Options[Idx] = Input
         return Input
     end
