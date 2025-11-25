@@ -5772,8 +5772,12 @@ ElementsTable.Input = (function()
         Input.SetTitle = InputFrame.SetTitle
         Input.SetDesc = InputFrame.SetDesc
         function Input:SetVisible(bool)
-            InputFrame:SetVisible(bool)
-        end
+			if InputFrame.SetVisible then
+				InputFrame:SetVisible(bool)
+			elseif InputFrame.Elements then
+				InputFrame.Elements.Visible = bool
+			end
+		end
         Input.Elements = InputFrame
         local Textbox = Components.Textbox(InputFrame.Frame, true)
         Textbox.Frame.Position = UDim2.new(1, -10, 0.5, 0)
