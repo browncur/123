@@ -7256,16 +7256,17 @@ function Library:CreateMinimizer(Config)
 			New("ImageLabel", {
 				Name = "Icon",
 				Image = iconAsset,
-				Size = UDim2.new(0.8, 0, 0.8, 0),
+				Size = UDim2.new(0.65, 0, 0.65, 0),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				BackgroundTransparency = 1,
+				ScaleType = Enum.ScaleType.Fit,
 				ThemeTag = {
 					ImageColor3 = "Text",
 				},
 			}, {
 				New("UIAspectRatioConstraint", { AspectRatio = 1, AspectType = Enum.AspectType.FitWithinMaxSize }),
-				New("UICorner", { CornerRadius = UDim.new(0, 0) })
+				New("UICorner", { CornerRadius = UDim.new(1, 0) })
 			}),
 
 		})
