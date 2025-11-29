@@ -7266,7 +7266,6 @@ function Library:CreateMinimizer(Config)
 				},
 			}, {
 				New("UIAspectRatioConstraint", { AspectRatio = 1, AspectType = Enum.AspectType.FitWithinMaxSize }),
-				New("UICorner", { CornerRadius = UDim.new(1, 0) })
 			}),
 
 		})
