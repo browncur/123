@@ -7256,7 +7256,7 @@ function Library:CreateMinimizer(Config)
 			New("ImageLabel", {
 				Name = "Icon",
 				Image = iconAsset,
-				Size = UDim2.new(0.95, 0, 0.95, 0),
+				Size = UDim2.new(0.9, 0, 0.9, 0),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				BackgroundTransparency = 1,
