@@ -3947,9 +3947,14 @@ ElementsTable.Toggle = (function()
 		local ToggleFrame = Components.Element(Config.Title, Config.Description, self.Container, true, Config)
 		ToggleFrame.DescLabel.Size = UDim2.new(1, -54, 0, 14)
 
+
+		function Toggle:SetVisible(bool)
+            ToggleFrame.Frame.Visible = bool
+        end
+        
 		Toggle.SetTitle = ToggleFrame.SetTitle
 		Toggle.SetDesc = ToggleFrame.SetDesc
-		Toggle.Visible = ToggleFrame.Visible
+		Toggle.Visible = Toggle.SetVisible
 		Toggle.Elements = ToggleFrame
 
 		local ToggleCircle = New("ImageLabel", {
